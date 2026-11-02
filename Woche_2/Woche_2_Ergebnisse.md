@@ -1,4 +1,4 @@
-### Vorgestellte Apps
+# Vorgestellte Apps
 
 ## Disc Golf Valley VR
 
