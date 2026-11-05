@@ -7,4 +7,12 @@ Als gemeinsames Lernprojekt entsteht schrittweise ein kleines VR-Bowling. Dabei 
 
 Der Kurs folgt dem Prinzip **Erleben, Verstehen, Bauen und Testen** und verbindet praktische Entwicklungsaufgaben mit der Reflexion technischer und gestalterischer Entscheidungen. Die erworbenen Grundlagen werden in einer individuellen Aufgabe und einem eigenen XR-Gruppenprojekt vertieft – von der Idee über den Prototyp bis zur Evaluation und Dokumentation. Das begleitende Skript dient als Hintergrundinformation und Nachschlagewerk.
 
+## Wochenübersicht
+
+| Woche | Inhalt |
+|---|---|
+| [Woche 1](Woche_1/Woche_1.md) | XR erleben: Sicherheit, Headset-Einrichtung, Apps an Stationen erproben, Gestaltungskriterien ableiten |
+| [Woche 2](Woche_2/Woche_2.md) | Unity-Projekt mit Meta XR SDK einrichten, Camera Rig, erste Grab Interaction, Link-Vorschau und APK-Build |
+| [Woche 3](Woche_3/Woche_3.md) | Kugel greifen und werfen, Bowlingbahn bauen, Physik und Reibung, Fehlerfälle testen |
+
 © 2026 Fabian Schmid-Michels. Soweit nicht anders angegeben, stehen diese Kursmaterialien unter der Lizenz Creative Commons Namensnennung – Weitergabe unter gleichen Bedingungen 4.0 International (CC BY-SA 4.0): https://creativecommons.org/licenses/by-sa/4.0/deed.de
