@@ -1,4 +1,4 @@
-# Woche 3: Kugel greifen, loslassen und werfen
+# Woche 3: Bowling! Kugeln, Physik und anderes.
 
 ## Überblick
 
@@ -32,15 +32,15 @@ Die Building Blocks aus der Aufgabe bis Woche 3 (siehe [Woche 2](../Woche_2/Woch
 
 ### Auswahl für das Bowling
 
-Im Anschluss wird kurz festgehalten, welche Building Blocks wann in das Bowling übernommen werden:
+Im Anschluss wird kurz festgehalten, welche Building Blocks in das Bowling übernommen werden können:
 
-| Building Block | Verwendung im Bowling | Woche |
-|---|---|---|
-| **Touch Hand Grab** | Greifposition der Kugel mit Hand-Tracking (Block 2) | 3 |
-| **Distance Grab** | Rückholung einer weit entfernten Kugel (BS) | 3 |
-| **Room Guardian** | Sicherheit beim Anlauf und Wurf im realen Raum | 3 |
-| **Controller Buttons Mapper** | Neustart bzw. Reset per Taste | 4 |
-| **Haptics**, **Spatial Audio** | Rückmeldung beim Greifen und bei Treffern; Roll- und Aufprallgeräusche | 5 |
+| Building Block | Beispielhafte Verwendung im Bowling | 
+|---|---|
+| **Touch Hand Grab** | Greifposition der Kugel mit Hand-Tracking (Block 2) | 
+| **Distance Grab** | Rückholung einer weit entfernten Kugel (BS) | 
+| **Room Guardian** | Sicherheit beim Anlauf und Wurf im realen Raum | 
+| **Controller Buttons Mapper** | Neustart bzw. Reset per Taste | 
+| **Haptics**, **Spatial Audio** | Rückmeldung beim Greifen und bei Treffern; Roll- und Aufprallgeräusche | 
 | **Effect Mesh**, **Anchor Prefab Spawner** | Mixed-Reality-Variante des Bowlings | Gruppenprojekte |
 
 ### Sicherheit beim Werfen
@@ -201,6 +201,8 @@ Zuerst wird eine einfache Bahn selbst gebaut. Dabei wird geübt, Maße aus der R
 | **Statisch** | Bahn, Anlauf, Bumper, Ablage | Collider, **kein** Rigidbody; im Inspector als *Static* markiert |
 | **Dynamisch** | Kugel, Pins | Collider **und** Rigidbody |
 
+Mit der Markierung *Static* sagt man Unity, dass sich ein Objekt zur Laufzeit nicht bewegt. Unity kann dann Arbeit vorab erledigen, statt sie in jedem Frame zu wiederholen. Lichtberechnungen werden vorab „gebacken“ (Lightmaps), mehrere Meshes werden zu weniger Draw Calls zusammengefasst (Static Batching), und die Objekte können für Occlusion Culling und die NavMesh-Erzeugung genutzt werden. Gerade auf der Quest mit ihrem begrenzten GPU- und CPU-Budget spart das spürbar Rechenzeit. Für die Physik ist die Markierung nicht entscheidend, denn dort macht das Fehlen eines Rigidbody ein Objekt statisch. Ein als *Static* markiertes Objekt sollte trotzdem nicht per Skript bewegt werden, weil die vorberechneten Daten sonst nicht mehr stimmen.
+
 Leitfragen:
 
 - Was passiert, wenn ein Bumper versehentlich einen Rigidbody erhält?
@@ -304,13 +306,13 @@ public class BallPhysics : MonoBehaviour
 
 `Rigidbody.maxAngularVelocity` wird nicht im Prefab gespeichert und deshalb zur Laufzeit in `Awake()` gesetzt. Die projektweite Grenze (**Project Settings → Physics → Default Max Angular Speed**) wird nicht verändert, weil sie auch für die Pins gilt. Leitfrage: Ändert sich das Rollverhalten auf der geölten Bahn spürbar, oder rutscht die Kugel trotzdem? Was ändert sich bei einem Wurf mit starker Handgelenksdrehung?
 
-Es werden mindestens drei **unplausible Würfe** gezielt herbeigeführt und beschrieben, zum Beispiel:
+Es werden mindestens drei **unplausible Würfe** gezielt herbeigeführt und beobachtet, zum Beispiel:
 
 - Die Kugel wird beim Loslassen nach oben geschleudert.
 - Die Kugel fällt senkrecht herunter, obwohl der Arm schwingt.
 - Die Kugel springt beim Aufsetzen auf die Bahn mehrfach hoch.
 
-Für jeden Fall wird eine Vermutung zur Ursache notiert, etwa Zeitpunkt des Loslassens, Tracking-Verlust, Greifposition oder Physikeinstellungen.
+Für jeden Fall wird eine Vermutung zur Ursache eruiert, etwa Zeitpunkt des Loslassens, Tracking-Verlust, Greifposition oder Physikeinstellungen.
 
 ### Fehlerfälle
 
@@ -325,8 +327,7 @@ Folgende Fehlerfälle werden im Headset herbeigeführt und beobachtet. Lösungen
 
 ### Vergleichstest
 
---- Wahrscheinlich zu Zeitaufwändig, wird wahrscheinlich übersprungen ---
-
+--- Wahrscheinlich zu Zeitaufwändig, wird dann übersprungen ---
 
 Zwei Konfigurationen der Wurfinteraktion werden miteinander verglichen. Eine Variante wird verändert, alles andere bleibt gleich. Beispiele:
 

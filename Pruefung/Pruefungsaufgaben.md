@@ -99,7 +99,7 @@ Bei Abgabe einer APK testen Sie zusätzlich ihre frische Installation (also vorh
 ### 3.4 Abgabecheckliste
 
 - [ ] Unity-Projekt mit `Assets`, `Packages` und `ProjectSettings`, ohne generierte Ordner wie `Library`.
-- [ ] Knappe README mit Variante, Bedienung, eigener Logik und bekannten Problemen; keine vorgegebene Seitenzahl.
+- [ ] Knappe README mit Variante, Bedienung, eigener Logik und bekannten Problemen; keine vorgegebene Seitenzahl. Weitere Dokumentation von Kapitel 5 beachten!
 - [ ] Testcheckliste mit Ergebnissen; sie darf Teil der README sein.
 - [ ] Quellen-, Asset- und Hilfsmittelangaben sowie Eigenständigkeitserklärung nach Hochschulvorgaben.
 - [ ] Optional für Technikpunkte: installierbare, autonom lauffähige Quest-3-APK.
