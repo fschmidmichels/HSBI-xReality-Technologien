@@ -18,6 +18,7 @@ Vor Beginn des Semesters richten Sie Unity Hub, Unity Engine und eine IDE ein un
 | [Woche 1](Woche_1/Woche_1.md) | XR erleben: Sicherheit, Headset-Einrichtung, Apps an Stationen erproben, Gestaltungskriterien ableiten | [Ergebnisse Woche 1](Woche_1/Woche_1_Ergebnisse.md) |
 | [Woche 2](Woche_2/Woche_2.md) | Unity-Projekt mit Meta XR SDK einrichten, Camera Rig, erste Grab Interaction, Link-Vorschau und APK-Build | [Ergebnisse Woche 2](Woche_2/Woche_2_Ergebnisse.md) |
 | [Woche 3](Woche_3/Woche_3.md) | Kugel greifen und werfen, Bowlingbahn bauen, Physik und Reibung, Fehlerfälle testen | – |
+| [Woche 4](Woche_4/Woche_4.md) | Aufgabe aus Woche 3 besprechen (Punktezählung, Rückholung), Unity mit KI: Copilot, Unity- und Meta-MCP-Server, Szene mit KI gestalten | – |
 
 ## Prüfung
 
