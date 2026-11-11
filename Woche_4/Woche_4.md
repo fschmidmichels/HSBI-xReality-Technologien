@@ -189,6 +189,7 @@ KI-Werkzeuge lassen sich in der Unity-Entwicklung auf unterschiedliche Weise ein
 Typische Fehlerquellen:
 
 - **veraltete oder erfundene APIs**, z. B. `velocity` statt `linearVelocity` (seit Unity 6) oder ältere OVR-Komponenten statt des Interaction SDK;
+
   <img src="images/script-updating-consent.png" alt="Unity-Dialog Script Updating Consent: Skripte verwenden eine geänderte API und können automatisch aktualisiert werden" style="max-width:100%; height: auto;">
 
 - **unpassende Paketversionen** oder Menüpfade, die es in der verwendeten Version nicht gibt;
@@ -219,7 +220,7 @@ VS Code ist seit Woche 2 als externer Skripteditor eingerichtet. Mit GitHub Copi
    - *Inline-Vorschläge* beim Tippen mit `Tab` übernehmen;
    - *Chat* (`Strg+Alt+I`) für Fragen und Erklärungen; markierter Code oder Dateien werden mit `#` als Kontext angehängt;
    - *Agent-Modus* im Chat für Änderungen über mehrere Dateien; Änderungen werden vor dem Übernehmen als Diff angezeigt.
-5. **Projektkontext hinterlegen:** In `.github/copilot-instructions.md` werden dauerhafte Hinweise für Copilot abgelegt (siehe [Anleitung 4](#anleitung-4--der-ki-den-kontext-und-die-mcp-server-bekannt-machen)).
+5. **Projektkontext hinterlegen:** In `AGENTS.md` werden dauerhafte Hinweise für Copilot und andere Agenten abgelegt (siehe [Anleitung 4](#anleitung-4--der-ki-den-kontext-und-die-mcp-server-bekannt-machen)).
 
 Weiterführend: [GitHub Copilot in VS Code](https://code.visualstudio.com/docs/copilot/overview).
 
@@ -251,7 +252,7 @@ Die **Unity CLI** (`unity`) ist ein Kommandozeilenwerkzeug von Unity. Sie verwal
 
    Dadurch wird der Unity-MCP-Server projektbezogen in die VS-Code-Konfiguration eingetragen. Mit `--dry-run` lässt sich vorher anzeigen, was geschrieben würde. In VS Code erscheinen die Unity-Werkzeuge danach im Copilot-Chat (Agent-Modus) unter *Tools*.
 
-4. **Telemetrie:** Nutzungsstatistiken sind standardmäßig deaktiviert (prüfen mit `unity analytics status`). Zusätzlich lassen sich anonyme Fehlerberichte mit der Umgebungsvariable `UNITY_NO_CRASH_REPORT` und der anonyme Aufruf-Ping mit `UNITY_NO_CLI_INVOKED_TELEMETRY=1` abschalten.
+4. **Telemetrie:** Nutzungsstatistiken sind standardmäßig deaktiviert (prüfen mit `unity analytics status`). Abschalten der Telemetrie geht mit `unity analytics opt-out`. (Zusätzlich lassen sich anonyme Fehlerberichte mit der Umgebungsvariable `UNITY_NO_CRASH_REPORT` und der anonyme Aufruf-Ping mit `UNITY_NO_CLI_INVOKED_TELEMETRY=1` abschalten.)
 
 **Hinweis:** Hat das Projekt Compile-Fehler, startet Unity im *Safe Mode*. Das Pipeline-Paket wird dann nicht geladen, und der Agent kann den Editor nicht erreichen. Zuerst die Compile-Fehler beheben.
 
@@ -274,7 +275,7 @@ Die **Meta VR CLI** (`metavr`) ist das offizielle Entwicklerwerkzeug von Meta f�
 2. **MCP in VS Code einbinden:** Entweder die geführte Einrichtung starten:
 
    ```powershell
-   metavr init --copilot --no-auth
+   metavr init --no-auth
    ```
 
    oder nur den MCP-Server eintragen:
@@ -312,7 +313,7 @@ Die **Meta VR CLI** (`metavr`) ist das offizielle Entwicklerwerkzeug von Meta f�
    metavr telemetry disable
    ```
 
-   `disable` schaltet die zusätzliche Datenerhebung ab; laut Meta bleibt nur essenzielle Telemetrie aktiv. Details zeigt `metavr telemetry about`.
+   `disable` schaltet die zusätzliche Datenerhebung ab; laut Meta bleibt nur essenzielle Telemetrie aktiv. Details zeigt `metavr telemetry about`. (Beim Dozenten kam leider immer eine Fehlermeldung "Telemetry settings are managed remotely".)
 
 Weiterführend: [Install Meta VR CLI](https://developers.meta.com/vr/essentials/metavr-install) und [Prompting best practices](https://developers.meta.com/vr/essentials/ai-prompting-best-practices).
 
@@ -340,16 +341,14 @@ Ein eingerichteter MCP-Server stellt Werkzeuge bereit. Ob und wie der Agent sie 
 
    Welche Datei `unity mcp configure vscode` schreibt, zeigt vorher die Option `--dry-run`. `metavr mcp install vscode` trägt den Server standardmäßig per Deep Link direkt in VS Code ein, mit `--file` stattdessen in eine `mcp.json`. Ausführliche Anleitung: [Add and manage MCP servers in VS Code](https://code.visualstudio.com/docs/agent-customization/mcp-servers) und [MCP configuration reference](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 
-2. **Projektanweisungen anlegen:** In `.github/copilot-instructions.md` werden dauerhafte Informationen hinterlegt, die Copilot bei jeder Anfrage berücksichtigt, z. B.:
+2. **Projektanweisungen anlegen:** In einer Datei `AGENTS.md` im Projektordner werden dauerhafte Informationen hinterlegt, die Agenten bei jeder Anfrage berücksichtigen, z. B. Unity-Version, XR-Stack, Konventionen und vorhandene Skripte.
+
+   Beispiel aus dem Muster-Projekt: [AGENTS.md](https://github.com/fschmidmichels/HSBI-xReality-Technologien-Unity/blob/Wintersemester-2026/2027/AGENTS.md)
+
+   **Achtung:** Nicht jeder Agent liest `AGENTS.md` automatisch. Claude Code etwa erwartet eine Datei `CLAUDE.md`. Darin genügt ein Verweis auf die gemeinsame Datei:
 
    ```markdown
-   # Projektkontext
-   - Unity 6000.3.18f1, Zielplattform Meta Quest 3 (Android)
-   - XR-Stack: OpenXR mit Meta XR All-in-One SDK (Building Blocks, Interaction SDK)
-   - Rigidbody: `linearVelocity` statt `velocity` verwenden
-   - Szenen über den Unity-MCP-Server ändern, keine .unity-Dateien von Hand bearbeiten
-   - Bei Fragen zum Meta XR SDK zuerst die Meta-Dokumentation über den metavr-MCP-Server durchsuchen
-   - Vorhandene Skripte (ScoreCounter, BallReturn, Pin, PinGroup) wiederverwenden statt neu schreiben
+   @AGENTS.md
    ```
 
 3. **Agent-Skills:** `metavr init` und `unity skill install vscode --local` legen zusätzliche Anleitungen für den Agenten ab, etwa zum Umgang mit dem Editor oder mit der Quest.
