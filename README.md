@@ -19,6 +19,7 @@ Vor Beginn des Semesters richten Sie Unity Hub, Unity Engine und eine IDE ein un
 | [Woche 2](Woche_2/Woche_2.md) | Unity-Projekt mit Meta XR SDK einrichten, Camera Rig, erste Grab Interaction, Link-Vorschau und APK-Build | [Ergebnisse Woche 2](Woche_2/Woche_2_Ergebnisse.md) |
 | [Woche 3](Woche_3/Woche_3.md) | Kugel greifen und werfen, Bowlingbahn bauen, Physik und Reibung, Fehlerfälle testen | – |
 | [Woche 4](Woche_4/Woche_4.md) | Aufgabe aus Woche 3 besprechen (Punktezählung, Rückholung), Unity mit KI: Copilot, Unity- und Meta-MCP-Server, Szene mit KI gestalten | – |
+| [Woche 5](Woche_5/Woche_5.md) | KI-Szenen vorstellen, Feedback-Inventur, räumliches Audio für Pins und Kugel, Haptik beim Greifen, räumliches UI mit Poke-Neustart, A/B-Vergleich | [Ergebnisse Woche 5](Woche_5/Woche_5_Ergebnisse.md) |
 
 ## Prüfung
 
