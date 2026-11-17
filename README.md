@@ -13,13 +13,19 @@ Vor Beginn des Semesters richten Sie Unity Hub, Unity Engine und eine IDE ein un
 
 ## Wochenübersicht
 
-| Woche | Inhalt | Ergebnisse |
-|---|---|---|
-| [Woche 1](Woche_1/Woche_1.md) | XR erleben: Sicherheit, Headset-Einrichtung, Apps an Stationen erproben, Gestaltungskriterien ableiten | [Ergebnisse Woche 1](Woche_1/Woche_1_Ergebnisse.md) |
-| [Woche 2](Woche_2/Woche_2.md) | Unity-Projekt mit Meta XR SDK einrichten, Camera Rig, erste Grab Interaction, Link-Vorschau und APK-Build | [Ergebnisse Woche 2](Woche_2/Woche_2_Ergebnisse.md) |
-| [Woche 3](Woche_3/Woche_3.md) | Kugel greifen und werfen, Bowlingbahn bauen, Physik und Reibung, Fehlerfälle testen | – |
-| [Woche 4](Woche_4/Woche_4.md) | Aufgabe aus Woche 3 besprechen (Punktezählung, Rückholung), Unity mit KI: Copilot, Unity- und Meta-MCP-Server, Szene mit KI gestalten | – |
-| [Woche 5](Woche_5/Woche_5.md) | KI-Szenen vorstellen, Feedback-Inventur, räumliches Audio für Pins und Kugel, Haptik beim Greifen, räumliches UI mit Poke-Neustart, A/B-Vergleich | [Ergebnisse Woche 5](Woche_5/Woche_5_Ergebnisse.md) |
+| Woche | Inhalt | Ergebnisse | Musterlösung |
+|---|---|---|---|
+| [Woche 1](Woche_1/Woche_1.md) | XR erleben: Sicherheit, Headset-Einrichtung, Apps an Stationen erproben, Gestaltungskriterien ableiten | [Ergebnisse Woche 1](Woche_1/Woche_1_Ergebnisse.md) | – |
+| [Woche 2](Woche_2/Woche_2.md) | Unity-Projekt mit Meta XR SDK einrichten, Camera Rig, erste Grab Interaction, Link-Vorschau und APK-Build | [Ergebnisse Woche 2](Woche_2/Woche_2_Ergebnisse.md) | [Stand Woche 2](https://github.com/fschmidmichels/HSBI-xReality-Technologien-Unity/tree/526715dd812e778e9ce1c33612df05f85e2b8d76) |
+| [Woche 3](Woche_3/Woche_3.md) | Kugel greifen und werfen, Bowlingbahn bauen, Physik und Reibung, Fehlerfälle testen | – | [Stand Woche 3](https://github.com/fschmidmichels/HSBI-xReality-Technologien-Unity/tree/ec10499b46b50268b93a7489409c16e46f43db90) |
+| [Woche 4](Woche_4/Woche_4.md) | Aufgabe aus Woche 3 besprechen (Punktezählung, Rückholung), Unity mit KI: Copilot, Unity- und Meta-MCP-Server, Szene mit KI gestalten | – | [Stand Woche 4](https://github.com/fschmidmichels/HSBI-xReality-Technologien-Unity/tree/1966ca31a9d72a2fdf9f1781643a9e24cea52046) |
+| [Woche 5](Woche_5/Woche_5.md) | KI-Szenen vorstellen, Feedback-Inventur, räumliches Audio für Pins und Kugel, Haptik beim Greifen, räumliches UI mit Poke-Neustart, A/B-Vergleich | [Ergebnisse Woche 5](Woche_5/Woche_5_Ergebnisse.md) | – |
+
+## Musterlösung
+
+Die Musterlösung zum VR-Bowling steht als Unity-Projekt auf GitHub bereit: [HSBI-xReality-Technologien-Unity](https://github.com/fschmidmichels/HSBI-xReality-Technologien-Unity). Sie wächst mit dem Kurs mit und zeigt jeweils den Stand nach der letzten Woche – von der Grab Interaction über Physik, Punktezählung und Kugelrückholung bis zu Audio, Haptik und Neustart. Das Projekt nutzt Unity 6.3 (URP) mit dem Meta XR SDK und OpenXR; Hinweise zum Öffnen, Bauen und Installieren auf der Quest sowie zu Quellen und Lizenzen der verwendeten Assets stehen in der README des Repositorys.
+
+Die Musterlösung dient zum Vergleichen und Nachschlagen, wenn Sie nicht weiterkommen oder eine Woche verpasst haben. Versuchen Sie die Aufgaben zuerst selbst zu lösen – der Lerneffekt entsteht beim eigenen Bauen und Testen.
 
 ## Prüfung
 

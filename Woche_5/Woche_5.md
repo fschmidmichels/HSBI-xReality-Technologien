@@ -8,7 +8,7 @@ Als gemeinsames Ergebnis entsteht ein Bowling-Prototyp mit abgestimmtem multimod
 
 **Umfang:** 4 h Praktikum + 2 h Betreutes Selbststudium.
 
-Grundlage ist das eigene Bowlingprojekt mit Punktezählung, Rückholung und dem Spielablauf aus Woche 4. Für Block 3 wird ein Paket mit Sounds bereitgestellt (siehe [Bereitgestellte Sounds](#bereitgestellte-sounds)). Vor Beginn wird der aktuelle Stand **mit Git committet**.
+Grundlage ist das eigene Bowlingprojekt mit Punktezählung, Rückholung und dem Spielablauf aus Woche 4. Für Block 3 wird ein Paket mit Sounds bereitgestellt (siehe [Bereitgestellte Sounds](#bereitgestellte-sounds)). Vor Beginn wird der aktuelle Stand **mit Git committet**. Andernfalls wird ein Klon von dem Musterprojekt von Woche 4 benutzt (siehe README).
 
 ## Lernziele
 
@@ -262,7 +262,7 @@ public class GrabHaptics : MonoBehaviour
 
     [Min(0.01f)]
     [Tooltip("Dauer des Impulses in Sekunden.")]
-    public float duration = 0.08f;
+    public float duration = 0.2f;
 
     private GrabInteractable grabInteractable;
     private HandGrabInteractable handGrabInteractable;
