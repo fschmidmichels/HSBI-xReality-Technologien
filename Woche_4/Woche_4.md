@@ -354,6 +354,50 @@ Ein eingerichteter MCP-Server stellt Werkzeuge bereit. Ob und wie der Agent sie 
 3. **Agent-Skills:** `metavr init` und `unity skill install vscode --local` legen zusätzliche Anleitungen für den Agenten ab, etwa zum Umgang mit dem Editor oder mit der Quest.
 4. **Im Prompt konkret werden:** Werkzeug ausdrücklich nennen, z. B. „Suche in der Meta-Dokumentation, wie …“ oder „Lege im laufenden Editor ein GameObject … an“.
 
+### Anleitung 5 – Alternative: KI:connect.nrw mit Continue
+
+[KI:connect.nrw](https://chat.kiconnect.nrw) ist ein KI-Dienst für die Hochschulen in NRW. Die Anmeldung erfolgt mit der Hochschulkennung, die Modelle laufen auf Servern in NRW. Ein GitHub-Account ist nicht nötig. Neben dem Chat im Browser lässt sich KI:connect per **API-Key** auch in VS Code nutzen, und zwar mit der Erweiterung **Continue** statt Copilot.
+
+**Starterpaket:** [`unity-kiconnectnrw-starter.zip`](unity-kiconnectnrw-starter.zip). Das Paket enthält eine fertige Konfiguration für den Kurs und eine ausführliche Schritt-für-Schritt-Anleitung (`ANLEITUNG.md`, Einrichtung ca. 20 Minuten).
+
+| Bestandteil | Inhalt |
+|---|---|
+| `ANLEITUNG.md` | vollständige Anleitung mit Fehlerbehebung |
+| `einrichten.cmd` / `einrichten.ps1` | automatische Einrichtung unter Windows |
+| `continue-config/config.yaml` | Modelle von KI:connect und Unity-/Meta-Dokumentation für `@Docs` |
+| `projekt-vorlage/.continue/` | Kursregeln für das Modell (`rules/`), Slash-Befehle (`prompts/`) und Unity-MCP-Server (`mcpServers/`) |
+| `optional/meta-vr.yaml` | Meta-VR-MCP-Server, nur bei Bedarf einschalten |
+| `verbindungstest/test_kiconnect.py` | prüft, ob der API-Key funktioniert |
+
+**Einrichtung in Kurzform** (Details in `ANLEITUNG.md`):
+
+1. ZIP entpacken (aus dem ZIP heraus funktioniert das Skript nicht).
+2. VS Code-Erweiterung **Continue** (Version 2.0 oder neuer) sowie Unity CLI und Meta VR CLI installieren (siehe [Anleitung 2](#anleitung-2--unity-cli-und-unity-mcp-server) und [Anleitung 3](#anleitung-3--meta-vr-cli-und-meta-mcp-server)).
+3. In KI:connect unten links auf den eigenen Namen klicken → **API-Key-Management** → Key erzeugen und sofort kopieren.
+4. `einrichten.cmd` per Doppelklick starten. Das Skript fragt nach dem Key und nach dem Ordner des Unity-Projekts.
+5. **Zuerst Unity öffnen**, danach VS Code mit dem Projektordner starten. Sonst kennt der Agent den Editor nicht.
+
+**Möglichkeiten:**
+
+| Modell | Einsatz |
+|---|---|
+| **GPT OSS 120B** | Standard für Fragen, Debugging, Erklärungen und Agent-Modus |
+| **Mistral Small 4** | zweite Meinung; größeres Kontextfenster für längere Projekte |
+| **GPT-6 Sol / Luna** | stärkste Modelle, nur gezielt bei schwierigen Problemen: Token-Limit derzeit 1.000.000 Tokens (Stand: November 2026), im Agent-Modus schnell aufgebraucht |
+
+Jedes Modell gibt es in den Varianten *Reasoning hoch* (gründlicher, verbraucht mehr Kontingent) und *schnell*.
+
+- **Chat-Modus:** Das Modell antwortet nur und ändert nichts.
+- **Agent-Modus:** Das Modell steuert den Unity-Editor über den Unity-MCP-Server (auf ca. 30 Werkzeuge reduziert, um Tokens zu sparen) und die Quest über `metavr` im Terminal.
+- **Slash-Befehle:** `/fehler`, `/review`, `/erklaeren`, `/planen` und `/quest` (Build auf die Quest bringen und Logs auswerten).
+- **Kontext:** `@Docs` (aktuelle Unity- und Meta-Dokumentation), `@Files`, `@Problems`, `@Codebase`.
+
+**Hinweise:**
+
+- **Datenstand:** GPT OSS (Juni 2024) und Mistral Small 4 (ca. November 2024) kennen Unity 6.3, das Meta XR SDK 207 und die Unity CLI kaum oder gar nicht. Deshalb mit `@Docs` nachschlagen und Compiler-Fehler vollständig an das Modell zurückgeben.
+- **Abweichung zu Anleitung 4:** Bei Continue **keine** `AGENTS.md` oder `CLAUDE.md` im Projektordner anlegen. Continue schickt sie bei jeder Anfrage mit, und sie können den Kursregeln widersprechen. Eigene Regeln kommen als zusätzliche Datei nach `.continue/rules/`.
+- Der API-Key ist persönlich. Er gehört nicht ins Git-Repository, nicht in Prompts und nicht in Screenshots.
+
 ### Live-Demo – GameManager mit KI
 
 In der Demo wird mit einem KI-Werkzeug ein `GameManager` für das Bowling ergänzt. Er legt fest, in welcher Phase sich das Spiel befindet, und bindet die vorhandenen Skripte `ScoreCounter` und `BallReturn` ein, statt deren Logik neu zu schreiben.
