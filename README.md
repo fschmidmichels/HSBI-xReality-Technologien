@@ -19,7 +19,8 @@ Vor Beginn des Semesters richten Sie Unity Hub, Unity Engine und eine IDE ein un
 | [Woche 2](Woche_2/Woche_2.md) | Unity-Projekt mit Meta XR SDK einrichten, Camera Rig, erste Grab Interaction, Link-Vorschau und APK-Build | [Ergebnisse Woche 2](Woche_2/Woche_2_Ergebnisse.md) | [Stand Woche 2](https://github.com/fschmidmichels/HSBI-xReality-Technologien-Unity/tree/526715dd812e778e9ce1c33612df05f85e2b8d76) |
 | [Woche 3](Woche_3/Woche_3.md) | Kugel greifen und werfen, Bowlingbahn bauen, Physik und Reibung, Fehlerfälle testen | – | [Stand Woche 3](https://github.com/fschmidmichels/HSBI-xReality-Technologien-Unity/tree/ec10499b46b50268b93a7489409c16e46f43db90) |
 | [Woche 4](Woche_4/Woche_4.md) | Aufgabe aus Woche 3 besprechen (Punktezählung, Rückholung), Unity mit KI: Copilot, Unity- und Meta-MCP-Server, Szene mit KI gestalten | – | [Stand Woche 4](https://github.com/fschmidmichels/HSBI-xReality-Technologien-Unity/tree/1966ca31a9d72a2fdf9f1781643a9e24cea52046) |
-| [Woche 5](Woche_5/Woche_5.md) | KI-Szenen vorstellen, Feedback-Inventur, räumliches Audio für Pins und Kugel, Haptik beim Greifen, räumliches UI mit Poke-Neustart, A/B-Vergleich | [Ergebnisse Woche 5](Woche_5/Woche_5_Ergebnisse.md) | – |
+| [Woche 5](Woche_5/Woche_5.md) | KI-Szenen vorstellen, Feedback-Inventur, räumliches Audio für Pins und Kugel, Haptik beim Greifen, räumliches UI mit Poke-Neustart, A/B-Vergleich | [Ergebnisse Woche 5](Woche_5/Woche_5_Ergebnisse.md) | [Stand Woche 5](https://github.com/fschmidmichels/HSBI-xReality-Technologien-Unity/tree/168fb3aafeb2017e3ef6ab08a7e79ec99b186d7e) |
+| [Woche 6](Woche_6/Woche_6.md) | Animiertes Neuaufstellen der Pins und Rückholen der Kugel mit kinematischen Rigidbodies, Performance auf der Quest 3 messen und optimieren, Bowling als MR-Variante mit Passthrough | – | – |
 
 ## Musterlösung
 
