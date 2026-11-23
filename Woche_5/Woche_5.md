@@ -262,7 +262,7 @@ public class GrabHaptics : MonoBehaviour
 
     [Min(0.01f)]
     [Tooltip("Dauer des Impulses in Sekunden.")]
-    public float duration = 0.2f;
+    public float duration = 0.15f;
 
     private GrabInteractable grabInteractable;
     private HandGrabInteractable handGrabInteractable;
@@ -338,6 +338,39 @@ Leitfragen:
 - Mit Hand-Tracking gibt es keinen Controller und damit keine Haptik. Welche Rückmeldung aus der Tabelle in Block 2 übernimmt dann?
 
 Weiterführend: Für aufwendigere Effekte gibt es das Haptics SDK und Haptics Studio von Meta, siehe [Other haptic runtime APIs](https://developers.meta.com/vr/documentation/unity/unity-haptics-apis) und die Vorstellung zum Building Block *Haptics* aus Woche 3.
+
+#### Optional für Schnelle – Haptik beim Wurf
+
+Auch das Loslassen kann eine Rückmeldung bekommen, abgestuft nach der Wurfgeschwindigkeit: ein Impuls bei einem langsamen Wurf, zwei kurz hintereinander bei einem schnellen und drei bei einem sehr schnellen. Eine reine Änderung der Stärke ist im Test kaum zu unterscheiden; die Anzahl der Impulse dagegen schon. Ein neues Skript `ThrowHaptics` wird an das Kugel-Prefab gehängt (neben `GrabHaptics`).
+
+Bausteine:
+
+- **Welcher Controller?** Wie in `GrabHaptics` beim Greifen (`WhenSelectingInteractorViewAdded`) den `ControllerRef` ermitteln und in einem Feld merken.
+- **Wie schnell?** Das *Grabbable* an der Kugel berechnet beim Loslassen die Wurfgeschwindigkeit und meldet sie über ein Ereignis:
+
+  ```csharp
+  Grabbable grabbable = GetComponent<Grabbable>();
+  grabbable.VelocityThrow.WhenThrown += OnThrown;   // in OnEnable, in OnDisable wieder abmelden
+
+  private void OnThrown(Vector3 velocity, Vector3 torque)
+  {
+      float speed = velocity.magnitude;   // m/s
+      // ...
+  }
+  ```
+
+- **Wie viele Impulse?** Zwei Schwellen teilen die Geschwindigkeit in Stufen ein, z. B. ab 3 m/s zwei und ab 4,5 m/s drei Impulse. Unterhalb von `minSpeed` (z. B. 1 m/s) wurde die Kugel nur abgelegt; dann gibt es keinen Impuls.
+- **Impulsfolge:** Eine Coroutine startet die Vibration in einer Schleife mehrmals, jeweils kurz (z. B. 0,08 s) und mit einer gleich langen Pause dazwischen (`WaitForSeconds`). Ohne Pause verschmelzen die Impulse zu einem langen.
+- **Zusätzlich die Stärke anpassen (optional):** `Mathf.InverseLerp(minSpeed, maxSpeed, speed)` liefert einen Wert zwischen 0 und 1, `Mathf.Lerp(minAmplitude, maxAmplitude, t)` macht daraus die Stärke.
+
+Hinweis: Nach kurzen Tracking-Lücken begrenzt das Interaction SDK die geschätzte Wurfgeschwindigkeit auf 5 m/s, besonders häufig über Link. Werden auffällig viele Würfe mit genau 5,00 m/s gemeldet, liegt es daran. Das betrifft nicht nur die Haptik, sondern auch die tatsächliche Geschwindigkeit der Kugel.
+
+Zum Einstellen der Schwellen hilft es, die gemessene Geschwindigkeit jedes Wurfs mit `Debug.Log` auszugeben und im Logcat (Tag *Unity*) mitzulesen.
+
+Leitfragen:
+
+- Welche Geschwindigkeiten kommen bei euren Würfen tatsächlich vor? Passen die Schwellen dazu?
+- Hilft die Rückmeldung, die Wurfstärke einzuschätzen, oder lenkt sie eher ab?
 
 ### Punktestand lesbar platzieren
 

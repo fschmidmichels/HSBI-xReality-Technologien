@@ -112,12 +112,39 @@ Erwartet von wenigen schnellen Personen:
 |---|---|
 | 0,3 / 0,05 s | kaum spürbar, wird leicht übersehen |
 | 0,6 / 0,08–0,1 s | sehr kurzes „Klick“-Gefühl; beim Greifen schwer zu bemerken (Test am Musterprojekt) |
-| 0,6 / 0,2 s | deutlich spürbar, ohne zu stören; Standardwert im Musterprojekt |
+| 0,6 / 0,15 s | deutlich spürbar, ohne zu stören; Standardwert im Musterprojekt (0,2 s wirkte im Test etwas zu lang) |
 | 1,0 / 0,3 s | zu stark und zu lang, wirkt wie ein Fehlersignal |
 
-- Erwartete Empfehlung: mittlere Stärke, kurze Dauer (um 0,2 s). Kürzere Impulse sind beim Zugreifen schwer zu bemerken.
+- Erwartete Empfehlung: mittlere Stärke, kurze Dauer (um 0,15 s). Kürzere Impulse sind beim Zugreifen schwer zu bemerken.
 - Leitfrage „Vibriert nur der greifende Controller?“: Ja, wenn der Controller über `ControllerRef` korrekt ermittelt wird. Typischer Fehler: beide Controller vibrieren (`OVRInput.Controller.Touch` bzw. `Active` statt `LTouch`/`RTouch`).
 - Mit Hand-Tracking: kein Impuls, kein Fehler.
+
+### Optional – Haptik beim Wurf
+
+- Musterlösung: `Assets/Bowling/Scripts/ThrowHaptics.cs` im Musterprojekt (am Prefab `BowlingBall`). Startwerte: unter 1 m/s kein Impuls, ab 1 m/s ein, ab 3 m/s zwei, ab 4,5 m/s drei Impulse; je Impuls 0,08 s, Pause 0,08 s; Stärke zusätzlich 0,4 bis 1,0 (1 bis 5 m/s).
+- Kern der Lösung:
+
+  ```csharp
+  int pulses = speed >= triplePulseSpeed ? 3 : speed >= doublePulseSpeed ? 2 : 1;
+
+  private IEnumerator Pulses(OVRInput.Controller touch, float amplitude, int count)
+  {
+      for (int i = 0; i < count; i++)
+      {
+          if (i > 0) yield return new WaitForSeconds(pauseDuration);
+          OVRInput.SetControllerVibration(1f, amplitude, touch);
+          yield return new WaitForSeconds(pulseDuration);
+          OVRInput.SetControllerVibration(1f, 0f, touch);
+      }
+  }
+  ```
+
+- Gemessene Wurfgeschwindigkeiten im Musterprojekt (Test über Link, 23.11.2026): Ablegen 0,02–0,8 m/s, Würfe 1,1–5,3 m/s, die meisten zwischen 3,5 und 5 m/s. Viele Würfe wurden mit genau 5,00 m/s gemeldet. Ursache: Liefert das Tracking in einem Frame keine neue Pose (unveränderte Position), verwirft `RANSACVelocity` die bisherigen Samples und setzt eine synthetische Pose ein, deren Geschwindigkeit auf `MaxSyntheticSpeed` = 5 m/s begrenzt ist. Liegt die Lücke kurz vor dem Loslassen, gewinnt oft diese Pose. Es ist keine feste Obergrenze (ein Wurf mit 5,3 m/s kam vor) und lässt sich ohne Änderung am SDK nicht verstellen (privates, gepooltes Objekt in `ThrowWhenUnselected`). Vermutlich tritt es über Link häufiger auf als in der APK; noch nicht geprüft.
+- Erfahrung aus dem Test: Eine reine Abstufung der Stärke (erste Fassung, 0,2 bis 1,0) war kaum zu spüren. Deshalb unterscheidet die Musterlösung die Stufen über die Anzahl der Impulse.
+
+- Typische Fehler: Der Controller wird erst beim Loslassen gesucht statt beim Greifen gemerkt; `WhenThrown` wird in `OnDisable` nicht abgemeldet; beim bloßen Ablegen vibriert es trotzdem (fehlende Schwelle `minSpeed`); keine Pause zwischen den Impulsen, sodass sie zu einem langen Impuls verschmelzen; Schwelle für drei Impulse über 5 m/s, sodass sie nie erreicht wird.
+- Leitfrage „Welche Geschwindigkeiten kommen vor?“: Die Werte sind im Logcat ablesbar; typisch sind 3 bis 5 m/s (siehe oben). Die Schwellen der Musterlösung sind aus diesen Messungen abgeleitet; ob sich die drei Stufen gut unterscheiden lassen, ist noch nicht getestet.
+- Leitfrage „Hilft die Rückmeldung?“: Erwartet wird eine Einschätzung, z. B. dass die Rückmeldung den Wurf bestätigt, aber erst nach dem Loslassen kommt und die Wurfstärke daher nicht mehr beeinflusst.
 
 ### Punktestand
 
